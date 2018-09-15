@@ -3,7 +3,9 @@
 
 ### Installation
 ```
-  $ npm install event-emitter
+  $ git clone https://github.com/ventinus/event-emitter.git
+  $ cd event-emitter
+  $ yarn install
 ```
 
 ### Usage
@@ -33,4 +35,8 @@ ee.emit('rogue')    // Not invoked
 ### Tests
 ```
   $ yarn test
+```
+Test in watch mode
+```
+  $ yarn dev
 ```
