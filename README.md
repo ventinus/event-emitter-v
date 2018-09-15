@@ -2,8 +2,9 @@
 ## Register handlers by name for custom triggering
 
 ### Installation
-
+```
   $ npm install event-emitter
+```
 
 ### Usage
 
@@ -20,15 +21,16 @@ ee.once('change', (args) => {
 
 ee.on('rogue', listener)
 
-ee.emit('change', arg1, arg2 /*…args*/) // Two above listeners invoked
-ee.emit('change', arg1, arg2 /*…args*/) // Only first listener invoked
+ee.emit('change', arg1, arg2 /*…args*/) // Two 'change' handlers invoked
+ee.emit('change', arg1, arg2 /*…args*/) // Only first 'change' listener invoked
 
-ee.off('change', listener)              // Removed first listener
-ee.emit('change', arg1, arg2 /*…args*/) // No listeners invoked
-ee.offAll()
+ee.off('change', listener)              // Removed first (and all) 'change' handlers
+ee.emit('change', arg1, arg2 /*…args*/) // No 'change' handlers invoked
+ee.offAll()  // Remove all handlers
 ee.emit('rogue') // Not invoked
 ```
 
 ### Tests
-
-  $ npm test
+```
+  $ yarn test
+```
