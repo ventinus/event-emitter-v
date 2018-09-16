@@ -36,7 +36,7 @@ ee.emit('rogue')    // Not invoked
   $ yarn test
   $ yarn lint
 ```
-Test in watch mode
+Tests in watch mode
 ```
   $ yarn dev
 ```
