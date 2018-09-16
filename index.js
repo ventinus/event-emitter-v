@@ -27,15 +27,7 @@ const eventEmitter = () => {
    * @param  {Function} callback Function to be executed
    * @return {Boolean}           Represents successful execution
    */
-  const on = (name, callback) => {
-    if (typeof callback === 'function') {
-      _addEvent('multi', name, callback)
-    } else {
-      console.error('callback must be a function')
-      return false
-    }
-    return true
-  }
+  const on = (name, callback) => _addEvent('multi', name, callback)
 
   /**
    * Adds a function to the array found by the key name under the once prop
@@ -44,15 +36,7 @@ const eventEmitter = () => {
    * @param  {Function} callback Function to be executed
    * @return {Boolean}           Represents successful execution
    */
-  const once = (name, callback) => {
-    if (typeof callback === 'function') {
-      _addEvent('once', name, callback)
-    } else {
-      console.error('callback must be a function')
-      return false
-    }
-    return true
-  }
+  const once = (name, callback) => _addEvent('once', name, callback)
 
   /**
    * Removes the handlers found by the key name under both multi and once props
@@ -100,7 +84,13 @@ const eventEmitter = () => {
    * @param  {Function} callback Handler to attach to event name
    */
   const _addEvent = (src, name, callback) => {
-    events[src][name] = events[src][name] ? events[src][name].concat(callback) : [callback]
+    if (typeof callback === 'function') {
+      events[src][name] = events[src][name] ? events[src][name].concat(callback) : [callback]
+    } else {
+      console.error('callback must be a function')
+      return false
+    }
+    return true
   }
 
   /**
