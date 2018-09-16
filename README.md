@@ -3,15 +3,13 @@
 
 ### Installation
 ```
-  $ git clone https://github.com/ventinus/event-emitter.git
-  $ cd event-emitter
-  $ yarn install
+  $ git clone https://github.com/ventinus/event-emitter.git && cd event-emitter
 ```
 
 ### Usage
 
 ```javascript
-const eventEmitter = require('event-emitter')
+const eventEmitter = require('./index')
 const ee = eventEmitter()
 const listener = (args) => { ... }
 
@@ -34,6 +32,7 @@ ee.emit('rogue')    // Not invoked
 
 ### Tests
 ```
+  $ yarn install
   $ yarn test
 ```
 Test in watch mode

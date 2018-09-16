@@ -59,7 +59,6 @@ const eventEmitter = () => {
    * Removes the handlers found by the key name under both multi and once props
    *
    * @param  {String}   name     Name of event to be removed
-   * @param  {Function} callback [description]
    * @return {Boolean}           Represents successful execution
    */
   const off = name => {
@@ -107,8 +106,9 @@ const eventEmitter = () => {
    * Triggers the handlers in the array found by the event name
    *
    * @private
-   * @param  {[type]}   name     [description]
-   * @param  {Function} callback [description]
+   * @param  {Object}   src      Either events.multi or events.once
+   * @param  {String}   name     Name of event to trigger
+   * @param  {Any}      rest     Any arguments to forward to the handler
    */
   const _triggerEvent = (src, name, ...rest) => {
     if (src[name]) {
