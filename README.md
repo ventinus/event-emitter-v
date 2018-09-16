@@ -9,7 +9,7 @@
 ### Usage
 
 ```javascript
-const eventEmitter = require('./index') // or require('event-emitter-v') if installed from npm
+const eventEmitter = require('./index') // or require('event-emitter-v') if installed from npm (not actually published)
 const ee = eventEmitter()
 const listener = (args) => { ... }
 
@@ -30,12 +30,18 @@ ee.offAll()         // Remove all handlers
 ee.emit('rogue')    // Not invoked
 ```
 
-### Tests
+### Tests and Linting
 ```
   $ yarn install
   $ yarn test
+  $ yarn lint
 ```
 Test in watch mode
 ```
   $ yarn dev
+```
+
+### Build
+```
+  $ yarn build
 ```
