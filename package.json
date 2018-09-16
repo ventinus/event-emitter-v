@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "create custom events",
   "main": "dist/event-emitter-v.js",
-  "unpkg": "dist/event-emitter-v.min.js",
-  "jsdelivr": "dist/event-emitter-v.min.js",
   "module": "index.js",
   "scripts": {
     "test": "jest && yarn lint",
@@ -26,6 +24,5 @@
     "rollup": "^0.66.0",
     "rollup-plugin-babel": "3",
     "rollup-plugin-terser": "^3.0.0"
-  },
-  "dependencies": {}
+  }
 }
