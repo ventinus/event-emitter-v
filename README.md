@@ -3,13 +3,13 @@
 
 ### Installation
 ```
-  $ git clone https://github.com/ventinus/event-emitter.git && cd event-emitter
+  $ git clone https://github.com/ventinus/event-emitter-v.git && cd event-emitter-v
 ```
 
 ### Usage
 
 ```javascript
-const eventEmitter = require('./index')
+const eventEmitter = require('./index') // or require('event-emitter-v') if installed from npm
 const ee = eventEmitter()
 const listener = (args) => { ... }
 

@@ -1,13 +1,15 @@
+'use strict';
+
 /**
  * Event Emitter
  *
  * Register named events to trigger under conditions
  */
 
-const eventEmitter = () => {
+var eventEmitter = function eventEmitter() {
   // events are categorized by desired execution
   // times so as to avoid name conflicts
-  const events = {
+  var events = {
     /**
      * houses all events to be triggered any amount of times
      * @type {Object}
@@ -17,25 +19,24 @@ const eventEmitter = () => {
      * houses all events to be triggered only once
      * @type {Object}
      */
-    once: {},
-  }
+    once: {}
 
-  /**
-   * Adds a function to the array found by the key name under the multi prop
-   *
-   * @param  {String}   name     The name of the event
-   * @param  {Function} callback Function to be executed
-   * @return {Boolean}           Represents successful execution
-   */
-  const on = (name, callback) => {
+    /**
+     * Adds a function to the array found by the key name under the multi prop
+     *
+     * @param  {String}   name     The name of the event
+     * @param  {Function} callback Function to be executed
+     * @return {Boolean}           Represents successful execution
+     */
+  };var on = function on(name, callback) {
     if (typeof callback === 'function') {
-      _addEvent('multi', name, callback)
+      _addEvent('multi', name, callback);
     } else {
-      console.error('callback must be a function')
-      return false
+      console.error('callback must be a function');
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
   /**
    * Adds a function to the array found by the key name under the once prop
@@ -44,15 +45,15 @@ const eventEmitter = () => {
    * @param  {Function} callback Function to be executed
    * @return {Boolean}           Represents successful execution
    */
-  const once = (name, callback) => {
+  var once = function once(name, callback) {
     if (typeof callback === 'function') {
-      _addEvent('once', name, callback)
+      _addEvent('once', name, callback);
     } else {
-      console.error('callback must be a function')
-      return false
+      console.error('callback must be a function');
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
   /**
    * Removes the handlers found by the key name under both multi and once props
@@ -60,22 +61,22 @@ const eventEmitter = () => {
    * @param  {String}   name     Name of event to be removed
    * @return {Boolean}           Represents successful execution
    */
-  const off = name => {
-    events.multi[name] = undefined
-    events.once[name] = undefined
-    return true
-  }
+  var off = function off(name) {
+    events.multi[name] = undefined;
+    events.once[name] = undefined;
+    return true;
+  };
 
   /**
    * Removes all handlers
    *
    * @return {Boolean}   Represents successful execution
    */
-  const offAll = () => {
-    events.multi = {}
-    events.once = {}
-    return true
-  }
+  var offAll = function offAll() {
+    events.multi = {};
+    events.once = {};
+    return true;
+  };
 
   /**
    * Triggers the handlers found by the key name under both multi and once props,
@@ -84,12 +85,16 @@ const eventEmitter = () => {
    * @param  {String}   name     Name of event to be triggered
    * @return {Boolean}           Represents successful execution
    */
-  const emit = (name, ...rest) => {
-    _triggerEvent('multi', name, ...rest)
-    _triggerEvent('once', name, ...rest)
-    events.once[name] = undefined
-    return true
-  }
+  var emit = function emit(name) {
+    for (var _len = arguments.length, rest = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      rest[_key - 1] = arguments[_key];
+    }
+
+    _triggerEvent.apply(undefined, ['multi', name].concat(rest));
+    _triggerEvent.apply(undefined, ['once', name].concat(rest));
+    events.once[name] = undefined;
+    return true;
+  };
 
   /**
    * Adds a handler by name to the existing or new array of handlers
@@ -99,9 +104,9 @@ const eventEmitter = () => {
    * @param  {String}   name     Name of event to be added
    * @param  {Function} callback Handler to attach to event name
    */
-  const _addEvent = (src, name, callback) => {
-    events[src][name] = events[src][name] ? events[src][name].concat(callback) : [callback]
-  }
+  var _addEvent = function _addEvent(src, name, callback) {
+    events[src][name] = events[src][name] ? events[src][name].concat(callback) : [callback];
+  };
 
   /**
    * Triggers the handlers in the array found by the event name
@@ -111,21 +116,26 @@ const eventEmitter = () => {
    * @param  {String}   name     Name of event to trigger
    * @param  {Any}      rest     Any arguments to forward to the handler
    */
-  const _triggerEvent = (src, name, ...rest) => {
-    if (events[src][name]) {
-      events[src][name].forEach(e => e(...rest))
+  var _triggerEvent = function _triggerEvent(src, name) {
+    for (var _len2 = arguments.length, rest = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+      rest[_key2 - 2] = arguments[_key2];
     }
-  }
+
+    if (events[src][name]) {
+      events[src][name].forEach(function (e) {
+        return e.apply(undefined, rest);
+      });
+    }
+  };
 
   // expose all public functions
   return {
-    on,
-    once,
-    off,
-    offAll,
-    emit,
-  }
-}
+    on: on,
+    once: once,
+    off: off,
+    offAll: offAll,
+    emit: emit
+  };
+};
 
-
-module.exports = eventEmitter
+module.exports = eventEmitter;

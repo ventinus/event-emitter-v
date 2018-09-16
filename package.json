@@ -1,15 +1,31 @@
 {
-  "name": "event-emitter",
+  "name": "event-emitter-v",
   "version": "1.0.0",
   "description": "create custom events",
-  "main": "index.js",
+  "main": "dist/event-emitter-v.js",
+  "unpkg": "dist/event-emitter-v.min.js",
+  "jsdelivr": "dist/event-emitter-v.min.js",
+  "module": "index.js",
   "scripts": {
-    "test": "jest",
-    "dev": "jest --watchAll"
+    "test": "jest && yarn lint",
+    "dev": "jest --watchAll",
+    "lint": "node_modules/.bin/eslint index.js",
+    "build": "node_modules/.bin/rollup -c",
+    "prepublishOnly": "rm -rf dist && yarn test && yarn build"
   },
   "author": "ventinus",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^23.6.0"
-  }
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^23.6.0",
+    "rollup": "^0.66.0",
+    "rollup-plugin-babel": "3",
+    "rollup-plugin-terser": "^3.0.0"
+  },
+  "dependencies": {}
 }
