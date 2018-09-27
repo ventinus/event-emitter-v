@@ -25,7 +25,6 @@ const eventEmitter = () => {
    *
    * @param  {String}   name     The name of the event
    * @param  {Function} callback Function to be executed
-   * @return {Boolean}           Represents successful execution
    */
   const on = (name, callback) => _addEvent('multi', name, callback)
 
@@ -34,7 +33,6 @@ const eventEmitter = () => {
    *
    * @param  {String}   name     The name of the event
    * @param  {Function} callback Function to be executed
-   * @return {Boolean}           Represents successful execution
    */
   const once = (name, callback) => _addEvent('once', name, callback)
 
@@ -42,23 +40,18 @@ const eventEmitter = () => {
    * Removes the handlers found by the key name under both multi and once props
    *
    * @param  {String}   name     Name of event to be removed
-   * @return {Boolean}           Represents successful execution
    */
   const off = name => {
     events.multi[name] = undefined
     events.once[name] = undefined
-    return true
   }
 
   /**
    * Removes all handlers
-   *
-   * @return {Boolean}   Represents successful execution
    */
   const offAll = () => {
     events.multi = {}
     events.once = {}
-    return true
   }
 
   /**
@@ -66,13 +59,11 @@ const eventEmitter = () => {
    * forwarding along any other arguments to the handlers
    *
    * @param  {String}   name     Name of event to be triggered
-   * @return {Boolean}           Represents successful execution
    */
   const emit = (name, ...rest) => {
     _triggerEvent('multi', name, ...rest)
     _triggerEvent('once', name, ...rest)
     events.once[name] = undefined
-    return true
   }
 
   /**
@@ -84,13 +75,10 @@ const eventEmitter = () => {
    * @param  {Function} callback Handler to attach to event name
    */
   const _addEvent = (src, name, callback) => {
-    if (typeof callback === 'function') {
-      events[src][name] = events[src][name] ? events[src][name].concat(callback) : [callback]
-    } else {
-      console.error('callback must be a function')
-      return false
+    if (typeof callback !== 'function') {
+      throw new Error('callback must be a function')
     }
-    return true
+    events[src][name] = events[src][name] ? events[src][name].concat(callback) : [callback]
   }
 
   /**
